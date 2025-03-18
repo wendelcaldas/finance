@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role', // role é o nivel de permissão
         'password',
     ];
 
@@ -45,5 +46,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // function que habilita usuario como admin
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

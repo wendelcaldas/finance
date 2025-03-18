@@ -17,6 +17,7 @@ class AuthController extends Controller
             'password' => 'required|min:6'
         ]);
         
+        // Ao criar o usuario o banco de dados seta como USER no nivel de acesso
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -24,7 +25,13 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            'token' => $user->createToken('auth_token')->plainTextToken
+            'token' => $user->createToken('auth_token')->plainTextToken,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role, // Enviamos a role para o frontend
+            ],
         ]);
     }
 
@@ -47,7 +54,13 @@ class AuthController extends Controller
         // var_dump($user);exit;
 
         return response()->json([
-            'token' => $user->createToken('auth_token')->plainTextToken
+            'token' => $user->createToken('auth_token')->plainTextToken,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role, // Enviamos a role para o frontend
+            ],
         ]);
     }
 

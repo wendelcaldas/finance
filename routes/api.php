@@ -14,6 +14,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Route::middleware('role:user')->group(function () {
+    //     Route::get('/admin', [FinanceiroController::class, 'testeRole']);
+    // });
+
+    Route::get('/admin', [FinanceiroController::class, 'testeRole']);
+    // ->middleware('role');
+
 });
 
 Route::get('/financeiro', [FinanceiroController::class, 'index']);
