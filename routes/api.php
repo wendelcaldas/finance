@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FinanceiroController;
+use App\Http\Controllers\TotvsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin', [FinanceiroController::class, 'testeRole']);
     // ->middleware('role');
 
+    // Rotas que comunicam com a totvs - Prefixo /totvs/nomedarota
+    Route::prefix('totvs')->group(function () {
+        Route::get('/buscar', [TotvsController::class, 'buscarDados']);
+    });
+
 });
 
 Route::get('/financeiro', [FinanceiroController::class, 'index']);
+
