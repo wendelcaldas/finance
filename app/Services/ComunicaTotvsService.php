@@ -22,20 +22,31 @@ class ComunicaTotvsService
      */
     public function buscarDados()
     {
-        var_dump("{$this->baseUrl}/DEV.001/0/f");
+        // var_dump("{$this->baseUrl}/DEV.001/0/f");exit;
+        // var_dump("{$this->username}");
+        // var_dump("{$this->pass}");
 
-        $response = Http::withBasicAuth($this->username, $this->password)
-            ->get("{$this->baseUrl}/DEV.001/0/f"); // encapsular a logica do endpoint - TO DO
-        var_dump($response);exit; // dbg
-        if ($response->successful()) {
-            return $response->json();
+        try {
+            $response = Http::withBasicAuth($this->username, $this->pass)
+                ->get("{$this->baseUrl}/DEV.001/0/f");
+    
+            if ($response->successful()) {
+                return $response->json();
+            }
+    
+            return [
+                'erro' => 'Erro ao buscar dados da TOTVS',
+                'status' => $response->status(),
+                'detalhes' => $response->body()
+            ];
+        } catch (\Exception $e) {
+            return [
+                'erro' => 'Falha na requisição',
+                'mensagem' => $e->getMessage(),
+                'linha' => $e->getLine(),
+                'arquivo' => $e->getFile()
+            ];
         }
-
-        return [
-            'erro' => 'Erro ao buscar dados da TOTVS',
-            'status' => $response->status(),
-            'detalhes' => $response->body()
-        ];
     }
 
     /**
