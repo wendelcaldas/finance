@@ -20,15 +20,16 @@ class ComunicaTotvsService
     /**
      * Faz uma requisição GET para a API TOTVS
      */
-    public function buscarDados()
+    public function buscarDados($dataIni, $dataFin)
     {
-        // var_dump("{$this->baseUrl}/DEV.001/0/f");exit;
-        // var_dump("{$this->username}");
-        // var_dump("{$this->pass}");
-
         try {
+            $url = "{$this->baseUrl}/DEV.001/0/f";
+            $params = [
+                'parameters' => "DATAINI={$dataIni}T00:00:00;DATAFIN={$dataFin}T23:59:59"
+            ];
+    
             $response = Http::withBasicAuth($this->username, $this->pass)
-                ->get("{$this->baseUrl}/DEV.001/0/f");
+                ->get($url, $params);
     
             if ($response->successful()) {
                 return $response->json();
