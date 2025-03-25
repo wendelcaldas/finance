@@ -20,8 +20,8 @@ class TotvsController extends Controller
     public function buscarDados(Request $request)
     {
         // Pegando os parâmetros da requisição - Caso não receba parametros usará o primeiro e ultimo dia do mês corrente
-        $dataIni = $request->query('data_ini', Carbon::now()->startOfMonth()->toDateString());
-        $dataFin = $request->query('data_fin', Carbon::now()->endOfMonth()->toDateString());
+        $dataIni = $request->query('data_inicio', Carbon::now()->startOfMonth()->toDateString());
+        $dataFin = $request->query('data_fim', Carbon::now()->endOfMonth()->toDateString());
 
         // Chama o service que comunica com a totvs
         $dados = $this->totvsService->buscarDados($dataIni, $dataFin); // chamada do service passando os param de data
