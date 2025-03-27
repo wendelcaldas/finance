@@ -39,7 +39,12 @@ class TotvsController extends Controller
             $formatado["saidas"][$dataFormatada] = $item["TOTAL_PAGO"];
         }
 
-        return response()->json($formatado);
+        $entrada = ["futebol"=>500, "alimentacao"=>100, "base"=>1000, "compras"=>1400];
+        $saida = ["futebol"=>100, "alimentacao"=>500, "base"=>300];
+        $natureza = ["entradas"=>$entrada, "saidas"=>$saida];
+        $re = ["natureza"=>$natureza, "fluxo"=>$formatado];
+
+        return response()->json($re);
     }
 
     public function enviarDados(Request $request)
