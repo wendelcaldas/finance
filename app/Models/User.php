@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -21,9 +22,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role', // role é o nivel de permissão
-        'password',
+        'plano', // plano é o tipo de contrato do usuario
+        'idade',
     ];
+
+    // relaciona usuario a contas
+    public function contas()
+    {
+        return $this->hasMany(Conta::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

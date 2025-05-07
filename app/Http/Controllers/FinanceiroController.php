@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 class FinanceiroController extends Controller
 {
     //
+    public function movimentacaoPorUsuario($userId)
+    {
+        $user = User::findOrFail($userId);
+    
+        $movimentacoes = \App\Models\Movimentacao::whereHas('conta', function ($query) use ($user) {
+            $query->whereIn('id', $user->contas->pluck('id'));
+        })->get();
+    
+        return response()->json($movimentacoes);
+    }
+
     public function index()
     {
         return 'testado';

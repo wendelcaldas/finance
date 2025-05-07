@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/user/{userId}/movimentacoes', [UserController::class, 'getMovimentacoesByUser']);
 
 // Rotas protegidas pelo sanctum apenas são validadas pelo bearer, caso precisemos de rotas pra login e senha usar auth:basic
 Route::middleware('auth:sanctum')->group(function () {
