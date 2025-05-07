@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('data');
             $table->enum('tipo', ['entrada', 'saida']);
             $table->enum('natureza', ['produto', 'serviço']);
-            $table->foreignId('conta_id')->nullable()->constrained('contas');
-            $table->foreignId('cartao_id')->nullable()->constrained('cartoes');
+            $table->foreignId('conta_id')->nullable()->constrained('contas')->nullOnDelete();
+            $table->foreignId('cartao_id')->nullable()->constrained('cartoes')->nullOnDelete();
             $table->timestamps();
         });
     }
