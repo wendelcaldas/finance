@@ -51,16 +51,17 @@ class AuthController extends Controller
             // var_dump('credenciais incorretas');exit;
         }
 
-        // var_dump($user);exit;
+        // gerando unico token por login
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'token' => $user->createToken('auth_token')->plainTextToken,
+            'token' => $token,
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->role,
-                'token' => $user->createToken('auth_token')->plainTextToken
+                'token' => $token
             ],
         ]);
     }

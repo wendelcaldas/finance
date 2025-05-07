@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class FinanceiroController extends Controller
 {
     //
+    public function index()
+    {
+        return 'testado';
+    }
+
     public function fluxoDeCaixa(){
         return 'teste';
     }
