@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'password',
         'plano', // plano é o tipo de contrato do usuario
         'idade',
     ];

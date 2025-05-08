@@ -11,6 +11,7 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
+        // var_dump('tega?');exit;
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -23,7 +24,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        // var_dump('tega?');exit;
         return response()->json([
             'token' => $user->createToken('auth_token')->plainTextToken,
             'user' => [
